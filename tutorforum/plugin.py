@@ -25,7 +25,7 @@ hooks = {
     "remote-image": {
         "forum": "{{ FORUM_DOCKER_IMAGE }}",
     },
-    "init": ["forum"],
+    "init": ["forum", "lms"],
 }
 
 
