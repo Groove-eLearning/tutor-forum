@@ -1,0 +1,9 @@
+export DJANGO_SETTINGS_MODULE=$SERVICE_VARIANT.envs.$SETTINGS
+# enable forum notifications
+./manage.py lms shell -c \
+'from openedx.core.djangoapps.site_configuration.models import SiteConfiguration; \
+from django.contrib.sites.models import Site; \
+site, _ = Site.objects.get_or_create(domain="{{ LMS_HOST }}"); \
+site_config = SiteConfiguration.objects.get_or_create(site=site, defaults={"enabled": True, "site_values": {}}); \
+site_config[0].site_values.update({"enable_forum_notifications": True,}); \
+site_config[0].save();'
